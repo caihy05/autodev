@@ -1,0 +1,5 @@
+#查看cpu
+#查看内存
+menmery: free -h
+#查看磁盘
+diskinfo: dh -h

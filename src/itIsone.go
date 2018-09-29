@@ -1,15 +1,15 @@
 package main
 
 import (
-	"cLinks"
 	"log"
 	"os"
-	"go-gypsy-master/yaml"
 	"fmt"
 	"path/filepath"
 	"strings"
+	"cLinks"
 )
 
+//获取可执行文件路径
 func GetFileDirectory() string {
 	dir, err := filepath.Abs(filepath.Dir(os.Args[0]))
 	if err != nil {
@@ -20,22 +20,13 @@ func GetFileDirectory() string {
 }
 
 func main() {
-	fmt.Println(GetFileDirectory())
-	config, err := yaml.ReadFile("E:/learn/go/autodev/src/conf/hostInfo.yaml")
-	if err != nil {
-		fmt.Println(err)
+	balance := [...]string{"lsblk", "df -h", "free"}
+	for i := 0; i<len(balance); i++{
+		//fmt.Println(i)
+		shellc := balance[i]
+		fmt.Println(shellc)
+		cLinks.ShellCommand(shellc)
 	}
-	user, _ := config.Get("user")
-	password, _ := config.Get("password")
-	host, _ := config.Get("host")
-	//port, _ := config.GetInt("port")
-	fmt.Printf("%s\n",user)
-	session, err := cLinks.Connect(user, password, host, 22)
-	if err != nil {
-	log.Fatal(err)
-	}
-	defer session.Close()
-	session.Stdout = os.Stdout
-	session.Stderr = os.Stderr
-	session.Run("lsblk")
+	fmt.Println("路径" + GetFileDirectory())
+	//cLinks.ShellCommand("cat /etc/hosts")
 }
