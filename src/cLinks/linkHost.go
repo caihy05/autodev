@@ -6,6 +6,7 @@ import (
 	"net"
 )
 
+//定义连接方法
 func Connect(user, password, host string, port int) (*ssh.Session, error) {
 	var (
 		auth  []ssh.AuthMethod
