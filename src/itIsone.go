@@ -20,13 +20,22 @@ func GetFileDirectory() string {
 }
 
 func main() {
-	balance := [...]string{"lsblk", "df -h", "free"}
-	for i := 0; i<len(balance); i++{
-		//fmt.Println(i)
-		shellc := balance[i]
-		fmt.Println(shellc)
-		cLinks.ShellCommand(shellc)
+	//创建命令集合
+	linuxCmdMap := make(map[string]string)
+	linuxCmdMap["查看cpu数量"] = "cat /proc/cpuinfo|grep processor|wc -l"
+	linuxCmdMap["查看内存大小"] = "cat /proc/meminfo|grep MemTotal|awk '{print $2}'"
+	linuxCmdMap["查看操作系统"] = "cat /etc/redhat-release"
+	//balance := [...]string{"cat /proc/cpuinfo|grep processor|wc -l", "cat /proc/meminfo|grep MemTotal|awk '{print $2}'", "cat /etc/redhat-release"}
+	//for i := 0; i<len(balance); i++{
+	//	//fmt.Println(i)
+	//	shellc := balance[i]
+	//	fmt.Println(shellc)
+	//	cLinks.ShellCommand(shellc)
+	//}
+	for linuxcmdinfo,linuxcmd := range linuxCmdMap  {
+		fmt.Println(linuxcmdinfo)
+		cLinks.ShellCommand(linuxcmd)
 	}
-	fmt.Println("路径" + GetFileDirectory())
+	fmt.Println("可执文件行路径所在位置" + GetFileDirectory())
 	//cLinks.ShellCommand("cat /etc/hosts")
 }

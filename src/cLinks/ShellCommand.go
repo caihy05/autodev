@@ -8,10 +8,11 @@ import (
 )
 //执行命令方法
 func ShellCommand(smd string){
-	fmt.Println("你输入的命令是：" + smd)
+	//fmt.Println("你输入的命令是：" + smd)
 	config, err := yaml.ReadFile( "src/conf/hostInfo.yaml")
 	if err != nil {
 		fmt.Println(err)
+		fmt.Println("读取文件错误，可能文件不存在")
 	}
 	user, _ := config.Get("user")
 	password, _ := config.Get("password")
